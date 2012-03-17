@@ -9,11 +9,12 @@
     {
         private FileSystemWatcher desktopWatcher;
         private string fileName;
-        const string DesktopPath = @"c:\Users\piotr\Desktop\";
+        private readonly string DesktopPath;
 
         public Form1()
         {
             InitializeComponent();
+            DesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\";
         }
 
         /// <summary>
@@ -49,7 +50,7 @@
 
         private void TrayIconBalloonTipClicked(object sender, EventArgs e)
         {
-            string args = string.Format("/Select, {0}{1}", DesktopPath, fileName);
+            string args = string.Format("/Select,{0}{1}", DesktopPath, fileName);
             var processStartInfo = new ProcessStartInfo("Explorer.exe", args);
             Process.Start(processStartInfo);
         }
