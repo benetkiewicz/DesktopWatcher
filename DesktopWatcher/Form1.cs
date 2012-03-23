@@ -7,32 +7,29 @@
 
     public partial class Form1 : Form
     {
+        private readonly string desktopPath;
+
         private FileSystemWatcher desktopWatcher;
+
         private string fileName;
-        private readonly string DesktopPath;
 
         public Form1()
         {
             InitializeComponent();
-            DesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\";
+            this.desktopPath = string.Format("{0}\\", Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
         }
 
-        /// <summary>
-        /// Handles the form load.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="eventArgs"></param>
-        public void FormLoadHandler(object sender, EventArgs eventArgs)
+        private void FormLoadHandler(object sender, EventArgs eventArgs)
         {
             desktopWatcher = new FileSystemWatcher();
-            desktopWatcher.Path = DesktopPath;
+            desktopWatcher.Path = this.desktopPath;
             desktopWatcher.Filter = "*.*";
             desktopWatcher.NotifyFilter = NotifyFilters.FileName;
             desktopWatcher.Created += FileOnDesktopCreated;
             desktopWatcher.EnableRaisingEvents = true;
         }
 
-        public void FormUnloadHandler(object sender, FormClosingEventArgs e)
+        private void FormUnloadHandler(object sender, FormClosingEventArgs e)
         {
             if (this.desktopWatcher != null)
             {
@@ -41,18 +38,23 @@
             }
         }
 
-        void FileOnDesktopCreated(object sender, FileSystemEventArgs e)
+        private void FileOnDesktopCreated(object sender, FileSystemEventArgs e)
         {
             fileName = e.Name;
             TrayIcon.BalloonTipText = string.Format("File {0} appeared on desktop!", e.Name);
-            TrayIcon.ShowBalloonTip(7*1000);
+            TrayIcon.ShowBalloonTip(7 * 1000);
         }
 
         private void TrayIconBalloonTipClicked(object sender, EventArgs e)
         {
-            string args = string.Format("/Select,{0}{1}", DesktopPath, fileName);
+            string args = string.Format("/Select,{0}{1}", this.desktopPath, fileName);
             var processStartInfo = new ProcessStartInfo("Explorer.exe", args);
             Process.Start(processStartInfo);
+        }
+
+        private void TrayExitMenuItemClicked(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
