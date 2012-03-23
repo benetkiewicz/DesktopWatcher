@@ -13,10 +13,15 @@
 
         private string fileName;
 
+        private decimal baloonDisplayTime;
+
+        private bool allowClose;
+
         public Form1()
         {
             InitializeComponent();
-            this.desktopPath = string.Format("{0}\\", Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+            desktopPath = string.Format("{0}\\", Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+            baloonDisplayTime = 5;
         }
 
         private void FormLoadHandler(object sender, EventArgs eventArgs)
@@ -29,12 +34,15 @@
             desktopWatcher.EnableRaisingEvents = true;
         }
 
-        private void FormUnloadHandler(object sender, FormClosingEventArgs e)
+        private void FormClosingHandler(object sender, FormClosingEventArgs e)
         {
-            if (this.desktopWatcher != null)
+            if (e.CloseReason == CloseReason.UserClosing)
             {
-                desktopWatcher.EnableRaisingEvents = false;
-                desktopWatcher.Dispose();
+                if (!allowClose)
+                {
+                    WindowState = FormWindowState.Minimized;
+                    e.Cancel = true;
+                }
             }
         }
 
@@ -42,7 +50,7 @@
         {
             fileName = e.Name;
             TrayIcon.BalloonTipText = string.Format("File {0} appeared on desktop!", e.Name);
-            TrayIcon.ShowBalloonTip(7 * 1000);
+            TrayIcon.ShowBalloonTip((int)baloonDisplayTime * 1000);
         }
 
         private void TrayIconBalloonTipClicked(object sender, EventArgs e)
@@ -54,7 +62,30 @@
 
         private void TrayExitMenuItemClicked(object sender, EventArgs e)
         {
-            this.Close();
+            allowClose = true;
+            Close();
+        }
+
+        private void SaveSettingsClicked(object sender, EventArgs e)
+        {
+            SaveSettings();
+            WindowState = FormWindowState.Minimized;
+        }
+
+        private void TrayIconMouseDoubleClicked(object sender, MouseEventArgs e)
+        {
+            LoadSettings();
+            WindowState = FormWindowState.Normal; 
+        }
+
+        private void SaveSettings()
+        {
+            this.baloonDisplayTime = this.upDownBaloonDuration.Value;
+        }
+
+        private void LoadSettings()
+        {
+            upDownBaloonDuration.Value = baloonDisplayTime;
         }
     }
 }
