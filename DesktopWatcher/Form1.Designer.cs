@@ -129,6 +129,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormClosingHandler);
             this.Load += new System.EventHandler(this.FormLoadHandler);
+            this.Resize += new System.EventHandler(this.FormResizeHandler);
             this.TrayMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.upDownBaloonDuration)).EndInit();
             this.ResumeLayout(false);

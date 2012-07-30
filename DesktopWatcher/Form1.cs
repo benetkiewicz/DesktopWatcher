@@ -46,6 +46,14 @@
             }
         }
 
+        private void FormResizeHandler(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.Hide();
+            }
+        }
+
         private void FileOnDesktopCreated(object sender, FileSystemEventArgs e)
         {
             fileName = e.Name;
@@ -75,6 +83,7 @@
         private void TrayIconMouseDoubleClicked(object sender, MouseEventArgs e)
         {
             LoadSettings();
+            this.Show();
             WindowState = FormWindowState.Normal; 
         }
 
