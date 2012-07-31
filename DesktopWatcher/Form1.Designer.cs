@@ -36,34 +36,34 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.TrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.TrayMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.trayMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblDuration = new System.Windows.Forms.Label();
-            this.upDownBaloonDuration = new System.Windows.Forms.NumericUpDown();
+            this.downUpBaloonDuration = new System.Windows.Forms.NumericUpDown();
             this.btnSaveSettings = new System.Windows.Forms.Button();
-            this.TrayMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.upDownBaloonDuration)).BeginInit();
+            this.trayMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.downUpBaloonDuration)).BeginInit();
             this.SuspendLayout();
             // 
-            // TrayIcon
+            // trayIcon
             // 
-            this.TrayIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.TrayIcon.BalloonTipText = "There is a new file on desktop";
-            this.TrayIcon.BalloonTipTitle = "New file on desktop";
-            this.TrayIcon.ContextMenuStrip = this.TrayMenu;
-            this.TrayIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("TrayIcon.Icon")));
-            this.TrayIcon.Text = "Desktop Watcher";
-            this.TrayIcon.Visible = true;
-            this.TrayIcon.BalloonTipClicked += new System.EventHandler(this.TrayIconBalloonTipClicked);
-            this.TrayIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TrayIconMouseDoubleClicked);
+            this.trayIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.trayIcon.BalloonTipText = "There is a new file on desktop";
+            this.trayIcon.BalloonTipTitle = "New file on desktop";
+            this.trayIcon.ContextMenuStrip = this.trayMenu;
+            this.trayIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("trayIcon.Icon")));
+            this.trayIcon.Text = "Desktop Watcher";
+            this.trayIcon.Visible = true;
+            this.trayIcon.BalloonTipClicked += new System.EventHandler(this.TrayIconBalloonTipClicked);
+            this.trayIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TrayIconMouseDoubleClicked);
             // 
-            // TrayMenu
+            // trayMenu
             // 
-            this.TrayMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.trayMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitMenuItem});
-            this.TrayMenu.Name = "TrayMenu";
-            this.TrayMenu.Size = new System.Drawing.Size(93, 26);
+            this.trayMenu.Name = "TrayMenu";
+            this.trayMenu.Size = new System.Drawing.Size(93, 26);
             // 
             // exitMenuItem
             // 
@@ -81,23 +81,23 @@
             this.lblDuration.TabIndex = 1;
             this.lblDuration.Text = "Baloon tip duration";
             // 
-            // upDownBaloonDuration
+            // downUpBaloonDuration
             // 
-            this.upDownBaloonDuration.Location = new System.Drawing.Point(206, 24);
-            this.upDownBaloonDuration.Maximum = new decimal(new int[] {
+            this.downUpBaloonDuration.Location = new System.Drawing.Point(206, 24);
+            this.downUpBaloonDuration.Maximum = new decimal(new int[] {
             60,
             0,
             0,
             0});
-            this.upDownBaloonDuration.Minimum = new decimal(new int[] {
+            this.downUpBaloonDuration.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.upDownBaloonDuration.Name = "upDownBaloonDuration";
-            this.upDownBaloonDuration.Size = new System.Drawing.Size(66, 20);
-            this.upDownBaloonDuration.TabIndex = 2;
-            this.upDownBaloonDuration.Value = new decimal(new int[] {
+            this.downUpBaloonDuration.Name = "downUpBaloonDuration";
+            this.downUpBaloonDuration.Size = new System.Drawing.Size(66, 20);
+            this.downUpBaloonDuration.TabIndex = 2;
+            this.downUpBaloonDuration.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -119,7 +119,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(294, 212);
             this.Controls.Add(this.lblDuration);
-            this.Controls.Add(this.upDownBaloonDuration);
+            this.Controls.Add(this.downUpBaloonDuration);
             this.Controls.Add(this.btnSaveSettings);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -130,8 +130,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormClosingHandler);
             this.Load += new System.EventHandler(this.FormLoadHandler);
             this.Resize += new System.EventHandler(this.FormResizeHandler);
-            this.TrayMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.upDownBaloonDuration)).EndInit();
+            this.trayMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.downUpBaloonDuration)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -139,11 +139,11 @@
 
         #endregion
 
-        private System.Windows.Forms.NotifyIcon TrayIcon;
-        private System.Windows.Forms.ContextMenuStrip TrayMenu;
+        private System.Windows.Forms.NotifyIcon trayIcon;
+        private System.Windows.Forms.ContextMenuStrip trayMenu;
         private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
         private System.Windows.Forms.Label lblDuration;
-        private System.Windows.Forms.NumericUpDown upDownBaloonDuration;
+        private System.Windows.Forms.NumericUpDown downUpBaloonDuration;
         private System.Windows.Forms.Button btnSaveSettings;
     }
 }
